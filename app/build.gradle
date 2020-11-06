@@ -9,7 +9,7 @@ android {
     buildToolsVersion "30.0.2"
 
     defaultConfig {
-        applicationId "com.subratsss.product_help"
+        applicationId "com.subratsss.product_questionary_app"
         minSdkVersion 19
         targetSdkVersion 30
         versionCode 1

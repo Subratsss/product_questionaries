@@ -1,4 +1,4 @@
-package com.subratsss.product_help
+package com.subratsss.product_questionary_app
 
 import org.junit.Test
 

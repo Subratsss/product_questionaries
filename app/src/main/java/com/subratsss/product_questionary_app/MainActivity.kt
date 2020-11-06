@@ -1,4 +1,4 @@
-package com.subratsss.product_help
+package com.subratsss.product_questionary_app
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
