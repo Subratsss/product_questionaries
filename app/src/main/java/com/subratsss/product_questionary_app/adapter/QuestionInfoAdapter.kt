@@ -3,117 +3,97 @@ package com.subratsss.product_questionary_app.adapter
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.annotation.LayoutRes
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.RecyclerView.Adapter
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.subratsss.product_questionary_app.BR
+import com.subratsss.product_questionary_app.R
+import com.subratsss.product_questionary_app.constants.ViewConstants.VIEW_TYPE_DROPDOWN
+import com.subratsss.product_questionary_app.constants.ViewConstants.VIEW_TYPE_DROPDOWN_VIEW_ID
+import com.subratsss.product_questionary_app.constants.ViewConstants.VIEW_TYPE_EMAILTEXT
+import com.subratsss.product_questionary_app.constants.ViewConstants.VIEW_TYPE_EMAILTEXT_VIEW_ID
+import com.subratsss.product_questionary_app.constants.ViewConstants.VIEW_TYPE_IMAGEVIEW_VIEW_ID
+import com.subratsss.product_questionary_app.constants.ViewConstants.VIEW_TYPE_MULTISELECT
+import com.subratsss.product_questionary_app.constants.ViewConstants.VIEW_TYPE_MULTISELECT_VIEW_ID
+import com.subratsss.product_questionary_app.constants.ViewConstants.VIEW_TYPE_RADIO
+import com.subratsss.product_questionary_app.constants.ViewConstants.VIEW_TYPE_RADIO_VIEW_ID
+import com.subratsss.product_questionary_app.constants.ViewConstants.VIEW_TYPE_TEXT
 import com.subratsss.product_questionary_app.constants.ViewConstants.VIEW_TYPE_TEXT_VIEW_ID
-import com.subratsss.product_questionary_app.databinding.RowTextViewBinding
+import com.subratsss.product_questionary_app.databinding.*
 import com.subratsss.product_questionary_app.model.QuestionInfo
 import com.subratsss.product_questionary_app.viewModel.QuestionInfoViewModel
 
 
-class QuestionInfoAdapter(@LayoutRes var layoutId: Int,
-                          private val questionDetailsList: ArrayList<QuestionInfo>,
-                          var viewModel: QuestionInfoViewModel
+class QuestionInfoAdapter(
+    private val questionDetailsList: ArrayList<QuestionInfo>,
+    var viewModel: QuestionInfoViewModel
 ) : Adapter<ViewHolder>() {
 
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-
-
         val layoutInflater = LayoutInflater.from(parent.context)
-        val binding = DataBindingUtil.inflate<ViewDataBinding>(
-            layoutInflater, viewType, parent, false
-        )
-        return TextViewHolder(binding as RowTextViewBinding)
 
-
-          /*  val layoutInflater = LayoutInflater.from(parent.context)
-           val binding = DataBindingUtil.inflate<ViewDataBinding>(
-               layoutInflater,
-               viewType,
-               parent,
-               false
-           )
-            return if (viewType == VIEW_TYPE_TEXT_VIEW_ID){
+        return (when (viewType) {
+            VIEW_TYPE_TEXT_VIEW_ID -> {
+                val binding = DataBindingUtil.inflate<ViewDataBinding>(
+                    layoutInflater,
+                    R.layout.row_text_view,
+                    parent,
+                    false
+                )
                 TextViewHolder(binding as RowTextViewBinding)
-            }else{
-                TextViewHolder(binding as RowTextViewBinding)
-            }*/
+            }
+            VIEW_TYPE_EMAILTEXT_VIEW_ID -> {
+                val binding = DataBindingUtil.inflate<ViewDataBinding>(
+                    layoutInflater,
+                    R.layout.row_email_text_view,
+                    parent,
+                    false
+                )
+                EmailTextViewHolder(binding as RowEmailTextViewBinding)
+            }
+            VIEW_TYPE_RADIO_VIEW_ID -> {
+                val binding = DataBindingUtil.inflate<ViewDataBinding>(
+                    layoutInflater,
+                    R.layout.row_radio_button_view,
+                    parent,
+                    false
+                )
+                RadioViewHolder(binding as RowRadioButtonViewBinding)
+            }
+            VIEW_TYPE_MULTISELECT_VIEW_ID -> {
+                val binding = DataBindingUtil.inflate<ViewDataBinding>(
+                    layoutInflater,
+                    R.layout.row_multi_selection_view,
+                    parent,
+                    false
+                )
+                MultiSelectViewHolder(binding as RowMultiSelectionViewBinding)
+            }
+            VIEW_TYPE_DROPDOWN_VIEW_ID -> {
+                val binding = DataBindingUtil.inflate<ViewDataBinding>(
+                    layoutInflater,
+                    R.layout.row_drop_down_view,
+                    parent,
+                    false
+                )
+                DropDownViewHolder(binding as RowDropDownViewBinding)
+            }
+            else -> {
+                val binding = DataBindingUtil.inflate<ViewDataBinding>(
+                    layoutInflater,
+                    R.layout.row_image_view,
+                    parent,
+                    false
+                )
+                ImageViewViewHolder(binding as RowImageViewBinding)
+            }
+        })
     }
-
-
-        /* return (when (viewType) {
-             VIEW_TYPE_TEXT_VIEW_ID -> {
-                 val layoutInflater = LayoutInflater.from(parent.context)
-                 val binding = DataBindingUtil.inflate<ViewDataBinding>(
-                     layoutInflater,
-                     viewType,
-                     parent,
-                     false
-                 )
-                 TextViewHolder(binding as RowTextViewBinding)
-             }
-             VIEW_TYPE_EMAILTEXT_VIEW_ID -> {
-                 val layoutInflater = LayoutInflater.from(parent.context)
-                 val binding = DataBindingUtil.inflate<ViewDataBinding>(
-                     layoutInflater,
-                     viewType,
-                     parent,
-                     false
-                 )
-                 EmailTextViewHolder(binding as RowEmailTextViewBinding)
-             }
-             VIEW_TYPE_RADIO_VIEW_ID -> {
-                 val layoutInflater = LayoutInflater.from(parent.context)
-                 val binding = DataBindingUtil.inflate<ViewDataBinding>(
-                     layoutInflater,
-                     viewType,
-                     parent,
-                     false
-                 )
-                 RadioViewHolder(binding as RowRadioButtonViewBinding)
-             }
-             VIEW_TYPE_MULTISELECT_VIEW_ID -> {
-                 val layoutInflater = LayoutInflater.from(parent.context)
-                 val binding = DataBindingUtil.inflate<ViewDataBinding>(
-                     layoutInflater,
-                     viewType,
-                     parent,
-                     false
-                 )
-                 MultiSelectViewHolder(binding as RowMultiSelectionViewBinding)
-             }
-             VIEW_TYPE_DROPDOWN_VIEW_ID -> {
-                 val layoutInflater = LayoutInflater.from(parent.context)
-                 val binding = DataBindingUtil.inflate<ViewDataBinding>(
-                     layoutInflater,
-                     viewType,
-                     parent,
-                     false
-                 )
-                 DropDownViewHolder(binding as RowDropDownViewBinding)
-             }
-             else -> {
-                 val layoutInflater = LayoutInflater.from(parent.context)
-                 val binding = DataBindingUtil.inflate<ViewDataBinding>(
-                     layoutInflater,
-                     viewType,
-                     parent,
-                     false
-                 )
-                 ImageViewViewHolder(binding as RowImageViewBinding)
-             }
-         })*/
-  //  }
 
     @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        (holder as TextViewHolder).bindData(viewModel, position)
-        /*   when(holder.itemViewType) {
+           when(holder.itemViewType) {
                VIEW_TYPE_TEXT_VIEW_ID -> {
                    (holder as TextViewHolder).bindData(viewModel, position)
                }
@@ -132,7 +112,7 @@ class QuestionInfoAdapter(@LayoutRes var layoutId: Int,
                else -> {
                    (holder as ImageViewViewHolder).bindData(viewModel, position)
                }
-           }*/
+           }
     }
 
     override fun getItemCount(): Int {
@@ -140,8 +120,8 @@ class QuestionInfoAdapter(@LayoutRes var layoutId: Int,
     }
 
     override fun getItemViewType(position: Int): Int {
-        return layoutId
-     /*   return (when (questionDetailsList[position].type) {
+
+        return (when (questionDetailsList[position].type) {
             VIEW_TYPE_TEXT -> {
                 VIEW_TYPE_TEXT_VIEW_ID
             }
@@ -160,7 +140,7 @@ class QuestionInfoAdapter(@LayoutRes var layoutId: Int,
             else -> {
                 VIEW_TYPE_IMAGEVIEW_VIEW_ID
             }
-        })*/
+        })
     }
 
     inner class TextViewHolder(private val binding: RowTextViewBinding) :
@@ -172,7 +152,7 @@ class QuestionInfoAdapter(@LayoutRes var layoutId: Int,
         }
     }
 
-   /* inner class EmailTextViewHolder(private val binding: RowEmailTextViewBinding) :
+    inner class EmailTextViewHolder(private val binding: RowEmailTextViewBinding) :
         ViewHolder(binding.root) {
 
         fun bindData(questionInfoViewModel: QuestionInfoViewModel, position: Int) {
@@ -215,5 +195,5 @@ class QuestionInfoAdapter(@LayoutRes var layoutId: Int,
             binding.setVariable(BR.viewModel, questionInfoViewModel)
             binding.setVariable(BR.position, position)
         }
-    }*/
+    }
 }

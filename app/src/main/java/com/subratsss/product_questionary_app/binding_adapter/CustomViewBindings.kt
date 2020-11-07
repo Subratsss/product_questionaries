@@ -1,9 +1,8 @@
 package com.subratsss.product_questionary_app.binding_adapter
 
+import android.R
 import android.view.View
-import android.widget.ImageView
-import android.widget.RadioButton
-import android.widget.RadioGroup
+import android.widget.*
 import androidx.core.net.toUri
 import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
@@ -34,8 +33,22 @@ fun setImageUrl(imgView: ImageView, imgUrl: String?){
             for (i in 1..values.size) {
                 val rbn = RadioButton(radioGroup.context)
                 rbn.id = View.generateViewId()
-                rbn.text = values[i].value
+                rbn.text = values[i - 1].value
                 radioGroup.addView(rbn)
             }
         }
     }
+
+@BindingAdapter("multipleSelection")
+fun setMultipleSelection(linearLayout: LinearLayout, values: List<ValueInfo>?){
+
+    if (!values.isNullOrEmpty()) {
+        for (i in 1..values.size) {
+            val chkTeamName = CheckBox(linearLayout.context)
+            chkTeamName.text = values[i - 1].value
+            linearLayout.addView(chkTeamName)
+        }
+    }
+}
+
+

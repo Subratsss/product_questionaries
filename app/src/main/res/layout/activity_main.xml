@@ -54,7 +54,7 @@
             android:layout_margin="@dimen/dimen_5dp"
             app:layout_constraintBottom_toTopOf="@+id/helpVideo_layout"
             app:layout_constraintTop_toBottomOf="@+id/category_name"
-            tools:listitem="@layout/row_question_details" />
+            tools:listitem="@layout/row_text_view" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/helpVideo_layout"
