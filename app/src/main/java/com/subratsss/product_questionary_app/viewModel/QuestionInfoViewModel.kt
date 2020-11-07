@@ -21,7 +21,7 @@ class QuestionInfoViewModel : ViewModel() {
 
         questionInfoRepository = QuestionaryRepo()
         questionLiveData = questionInfoRepository.getQuestionary()
-        adapter = QuestionInfoAdapter( questionInfoList, this)
+        adapter = QuestionInfoAdapter(R.layout.row_text_view, questionInfoList, this)
 
     }
 

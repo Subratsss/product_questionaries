@@ -11,9 +11,6 @@ import com.subratsss.product_questionary_app.model.ValueInfo
 
 
 /**
- * Custom Binding Adapter
- */
-/**
  * Custom Binding Adapter for Glide
  */
 @BindingAdapter("imageUrl")

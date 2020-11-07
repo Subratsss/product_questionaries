@@ -3,35 +3,50 @@ package com.subratsss.product_questionary_app.adapter
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.annotation.LayoutRes
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
-import androidx.recyclerview.widget.RecyclerView.*
+import androidx.recyclerview.widget.RecyclerView.Adapter
+import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.subratsss.product_questionary_app.BR
-import com.subratsss.product_questionary_app.constants.ViewConstants.VIEW_TYPE_DROPDOWN
-import com.subratsss.product_questionary_app.constants.ViewConstants.VIEW_TYPE_DROPDOWN_VIEW_ID
-import com.subratsss.product_questionary_app.constants.ViewConstants.VIEW_TYPE_EMAILTEXT
-import com.subratsss.product_questionary_app.constants.ViewConstants.VIEW_TYPE_EMAILTEXT_VIEW_ID
-import com.subratsss.product_questionary_app.constants.ViewConstants.VIEW_TYPE_IMAGEVIEW
-import com.subratsss.product_questionary_app.constants.ViewConstants.VIEW_TYPE_IMAGEVIEW_VIEW_ID
-import com.subratsss.product_questionary_app.constants.ViewConstants.VIEW_TYPE_MULTISELECT
-import com.subratsss.product_questionary_app.constants.ViewConstants.VIEW_TYPE_MULTISELECT_VIEW_ID
-import com.subratsss.product_questionary_app.constants.ViewConstants.VIEW_TYPE_RADIO
-import com.subratsss.product_questionary_app.constants.ViewConstants.VIEW_TYPE_RADIO_VIEW_ID
-import com.subratsss.product_questionary_app.constants.ViewConstants.VIEW_TYPE_TEXT
 import com.subratsss.product_questionary_app.constants.ViewConstants.VIEW_TYPE_TEXT_VIEW_ID
-import com.subratsss.product_questionary_app.databinding.*
+import com.subratsss.product_questionary_app.databinding.RowTextViewBinding
 import com.subratsss.product_questionary_app.model.QuestionInfo
 import com.subratsss.product_questionary_app.viewModel.QuestionInfoViewModel
 
 
-class QuestionInfoAdapter(
-    private val questionDetailsList: ArrayList<QuestionInfo>,
-    var viewModel: QuestionInfoViewModel
+class QuestionInfoAdapter(@LayoutRes var layoutId: Int,
+                          private val questionDetailsList: ArrayList<QuestionInfo>,
+                          var viewModel: QuestionInfoViewModel
 ) : Adapter<ViewHolder>() {
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-         return (when (viewType) {
+
+
+        val layoutInflater = LayoutInflater.from(parent.context)
+        val binding = DataBindingUtil.inflate<ViewDataBinding>(
+            layoutInflater, viewType, parent, false
+        )
+        return TextViewHolder(binding as RowTextViewBinding)
+
+
+          /*  val layoutInflater = LayoutInflater.from(parent.context)
+           val binding = DataBindingUtil.inflate<ViewDataBinding>(
+               layoutInflater,
+               viewType,
+               parent,
+               false
+           )
+            return if (viewType == VIEW_TYPE_TEXT_VIEW_ID){
+                TextViewHolder(binding as RowTextViewBinding)
+            }else{
+                TextViewHolder(binding as RowTextViewBinding)
+            }*/
+    }
+
+
+        /* return (when (viewType) {
              VIEW_TYPE_TEXT_VIEW_ID -> {
                  val layoutInflater = LayoutInflater.from(parent.context)
                  val binding = DataBindingUtil.inflate<ViewDataBinding>(
@@ -92,32 +107,32 @@ class QuestionInfoAdapter(
                  )
                  ImageViewViewHolder(binding as RowImageViewBinding)
              }
-         })
-    }
+         })*/
+  //  }
 
     @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-
-        when(holder.itemViewType) {
-            VIEW_TYPE_TEXT_VIEW_ID -> {
-                (holder as TextViewHolder).bindData(viewModel, position)
-            }
-            VIEW_TYPE_EMAILTEXT_VIEW_ID -> {
-                (holder as EmailTextViewHolder).bindData(viewModel, position)
-            }
-            VIEW_TYPE_RADIO_VIEW_ID -> {
-                (holder as RadioViewHolder).bindData(viewModel, position)
-            }
-            VIEW_TYPE_MULTISELECT_VIEW_ID -> {
-                (holder as MultiSelectViewHolder).bindData(viewModel, position)
-            }
-            VIEW_TYPE_DROPDOWN_VIEW_ID -> {
-                (holder as DropDownViewHolder).bindData(viewModel, position)
-            }
-            else -> {
-                (holder as ImageViewViewHolder).bindData(viewModel, position)
-            }
-        }
+        (holder as TextViewHolder).bindData(viewModel, position)
+        /*   when(holder.itemViewType) {
+               VIEW_TYPE_TEXT_VIEW_ID -> {
+                   (holder as TextViewHolder).bindData(viewModel, position)
+               }
+               VIEW_TYPE_EMAILTEXT_VIEW_ID -> {
+                   (holder as EmailTextViewHolder).bindData(viewModel, position)
+               }
+               VIEW_TYPE_RADIO_VIEW_ID -> {
+                   (holder as RadioViewHolder).bindData(viewModel, position)
+               }
+               VIEW_TYPE_MULTISELECT_VIEW_ID -> {
+                   (holder as MultiSelectViewHolder).bindData(viewModel, position)
+               }
+               VIEW_TYPE_DROPDOWN_VIEW_ID -> {
+                   (holder as DropDownViewHolder).bindData(viewModel, position)
+               }
+               else -> {
+                   (holder as ImageViewViewHolder).bindData(viewModel, position)
+               }
+           }*/
     }
 
     override fun getItemCount(): Int {
@@ -125,24 +140,27 @@ class QuestionInfoAdapter(
     }
 
     override fun getItemViewType(position: Int): Int {
-        return (when {
-            questionDetailsList[position].type === VIEW_TYPE_TEXT -> {
+        return layoutId
+     /*   return (when (questionDetailsList[position].type) {
+            VIEW_TYPE_TEXT -> {
                 VIEW_TYPE_TEXT_VIEW_ID
             }
-            questionDetailsList[position].type === VIEW_TYPE_EMAILTEXT -> {
+            VIEW_TYPE_EMAILTEXT -> {
                 VIEW_TYPE_EMAILTEXT_VIEW_ID
             }
-            questionDetailsList[position].type === VIEW_TYPE_RADIO -> {
+            VIEW_TYPE_RADIO -> {
                 VIEW_TYPE_RADIO_VIEW_ID
             }
-            questionDetailsList[position].type === VIEW_TYPE_MULTISELECT -> {
+            VIEW_TYPE_MULTISELECT -> {
                 VIEW_TYPE_MULTISELECT_VIEW_ID
             }
-            questionDetailsList[position].type === VIEW_TYPE_DROPDOWN -> {
+            VIEW_TYPE_DROPDOWN -> {
                 VIEW_TYPE_DROPDOWN_VIEW_ID
             }
-            else -> { VIEW_TYPE_IMAGEVIEW_VIEW_ID}
-        })
+            else -> {
+                VIEW_TYPE_IMAGEVIEW_VIEW_ID
+            }
+        })*/
     }
 
     inner class TextViewHolder(private val binding: RowTextViewBinding) :
@@ -154,7 +172,7 @@ class QuestionInfoAdapter(
         }
     }
 
-    inner class EmailTextViewHolder(private val binding: RowEmailTextViewBinding) :
+   /* inner class EmailTextViewHolder(private val binding: RowEmailTextViewBinding) :
         ViewHolder(binding.root) {
 
         fun bindData(questionInfoViewModel: QuestionInfoViewModel, position: Int) {
@@ -197,5 +215,5 @@ class QuestionInfoAdapter(
             binding.setVariable(BR.viewModel, questionInfoViewModel)
             binding.setVariable(BR.position, position)
         }
-    }
+    }*/
 }
