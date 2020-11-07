@@ -19,19 +19,24 @@ class QuestionInfoViewModel : ViewModel(), OnResultListener {
     private var questionLiveData = MutableLiveData<OnResponse>()
      var questionInfoList: ArrayList<QuestionInfo> = arrayListOf()
     private lateinit var adapter: QuestionInfoAdapter
+    private var isRefresed:Boolean = false
 
 
     fun init() {
         questionInfoRepository = QuestionaryRepo()
-        questionInfoRepository.getQuestionary(this)
         adapter = QuestionInfoAdapter(questionInfoList, this)
     }
 
     fun onRefreshView() {
-       init()
+        isRefresed = true
+        if (questionInfoList.size > 0){
+            questionInfoList.clear()
+        }
+        getProductRepository()
     }
 
     fun getProductRepository(): MutableLiveData<OnResponse> {
+        questionInfoRepository.getQuestionary(this)
         return questionLiveData
     }
 
@@ -50,6 +55,9 @@ class QuestionInfoViewModel : ViewModel(), OnResultListener {
     }
 
     fun setValuesList(position: Int): ArrayList<ValueInfo> {
+        if (isRefresed && questionInfoList[position].values.size > 0){
+            questionInfoList[position].values.clear()
+        }
         return questionInfoList[position].values
     }
 
