@@ -60,6 +60,7 @@ class MainActivity : AppCompatActivity(), SwipeRefreshLayout.OnRefreshListener {
         if (activityMainBinding.swipeRefreshLayout.isRefreshing) {
             activityMainBinding.swipeRefreshLayout.isRefreshing = false
         }
+        activityMainBinding.progressBar.visibility = View.VISIBLE
         viewModel.onRefreshView()
     }
 
