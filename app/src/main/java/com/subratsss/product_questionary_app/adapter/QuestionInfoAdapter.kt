@@ -3,12 +3,10 @@ package com.subratsss.product_questionary_app.adapter
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.annotation.LayoutRes
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.RecyclerView
 import com.subratsss.product_questionary_app.BR
-import com.subratsss.product_questionary_app.R
 import com.subratsss.product_questionary_app.constants.ViewConstants.VIEW_TYPE_DROPDOWN
 import com.subratsss.product_questionary_app.constants.ViewConstants.VIEW_TYPE_DROPDOWN_VIEW_ID
 import com.subratsss.product_questionary_app.constants.ViewConstants.VIEW_TYPE_EMAILTEXT
@@ -21,7 +19,7 @@ import com.subratsss.product_questionary_app.constants.ViewConstants.VIEW_TYPE_R
 import com.subratsss.product_questionary_app.constants.ViewConstants.VIEW_TYPE_RADIO_VIEW_ID
 import com.subratsss.product_questionary_app.constants.ViewConstants.VIEW_TYPE_TEXT
 import com.subratsss.product_questionary_app.constants.ViewConstants.VIEW_TYPE_TEXT_VIEW_ID
-import com.subratsss.product_questionary_app.databinding.RowQuestionDetailsBinding
+import com.subratsss.product_questionary_app.databinding.*
 import com.subratsss.product_questionary_app.model.QuestionInfo
 import com.subratsss.product_questionary_app.viewModel.QuestionInfoViewModel
 
@@ -37,22 +35,22 @@ class QuestionInfoAdapter(
             DataBindingUtil.inflate<ViewDataBinding>(layoutInflater, viewType, parent, false)
         return (when (viewType) {
             VIEW_TYPE_TEXT_VIEW_ID -> {
-                TextViewHolder(binding as RowQuestionDetailsBinding)
+                TextViewHolder(binding as RowTextViewBinding)
             }
             VIEW_TYPE_EMAILTEXT_VIEW_ID -> {
-                EmailTextViewHolder(binding as RowQuestionDetailsBinding)
+                EmailTextViewHolder(binding as RowEmailTextViewBinding)
             }
             VIEW_TYPE_RADIO_VIEW_ID -> {
-                RadioViewHolder(binding as RowQuestionDetailsBinding)
+                RadioViewHolder(binding as RowRadioButtonViewBinding)
             }
             VIEW_TYPE_MULTISELECT_VIEW_ID -> {
-                MultiSelectViewHolder(binding as RowQuestionDetailsBinding)
+                MultiSelectViewHolder(binding as RowMultiSelectionViewBinding)
             }
             VIEW_TYPE_DROPDOWN_VIEW_ID -> {
-                DropDownViewHolder(binding as RowQuestionDetailsBinding)
+                DropDownViewHolder(binding as RowDropDownViewBinding)
             }
             VIEW_TYPE_IMAGEVIEW_VIEW_ID -> {
-                ImageViewViewHolder(binding as RowQuestionDetailsBinding)
+                ImageViewViewHolder(binding as RowImageViewBinding)
             }
             else -> {}
         }) as RecyclerView.ViewHolder
@@ -109,61 +107,60 @@ class QuestionInfoAdapter(
             questionDetailsList[position].type === VIEW_TYPE_IMAGEVIEW -> {
                 VIEW_TYPE_IMAGEVIEW_VIEW_ID
             }
-            else -> {
-            }
+            else -> { }
         }) as Int
     }
 
-    inner class TextViewHolder(private val binding: RowQuestionDetailsBinding) :
+    inner class TextViewHolder(private val binding: RowTextViewBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bindData(productInfoViewModel: QuestionInfoViewModel, position: Int) {
-            binding.setVariable(BR.viewModel, productInfoViewModel)
+        fun bindData(questionInfoViewModel: QuestionInfoViewModel, position: Int) {
+            binding.setVariable(BR.viewModel, questionInfoViewModel)
             binding.setVariable(BR.position, position)
         }
     }
 
-    inner class EmailTextViewHolder(private val binding: RowQuestionDetailsBinding) :
+    inner class EmailTextViewHolder(private val binding: RowEmailTextViewBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bindData(productInfoViewModel: QuestionInfoViewModel, position: Int) {
-            binding.setVariable(BR.viewModel, productInfoViewModel)
+        fun bindData(questionInfoViewModel: QuestionInfoViewModel, position: Int) {
+            binding.setVariable(BR.viewModel, questionInfoViewModel)
             binding.setVariable(BR.position, position)
         }
     }
 
-    inner class RadioViewHolder(private val binding: RowQuestionDetailsBinding) :
+    inner class RadioViewHolder(private val binding: RowRadioButtonViewBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bindData(productInfoViewModel: QuestionInfoViewModel, position: Int) {
-            binding.setVariable(BR.viewModel, productInfoViewModel)
+        fun bindData(questionInfoViewModel: QuestionInfoViewModel, position: Int) {
+            binding.setVariable(BR.viewModel, questionInfoViewModel)
             binding.setVariable(BR.position, position)
         }
     }
 
-    inner class MultiSelectViewHolder(private val binding: RowQuestionDetailsBinding) :
+    inner class MultiSelectViewHolder(private val binding: RowMultiSelectionViewBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bindData(productInfoViewModel: QuestionInfoViewModel, position: Int) {
-            binding.setVariable(BR.viewModel, productInfoViewModel)
+        fun bindData(questionInfoViewModel: QuestionInfoViewModel, position: Int) {
+            binding.setVariable(BR.viewModel, questionInfoViewModel)
             binding.setVariable(BR.position, position)
         }
     }
 
-    inner class DropDownViewHolder(private val binding: RowQuestionDetailsBinding) :
+    inner class DropDownViewHolder(private val binding: RowDropDownViewBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bindData(productInfoViewModel: QuestionInfoViewModel, position: Int) {
-            binding.setVariable(BR.viewModel, productInfoViewModel)
+        fun bindData(questionInfoViewModel: QuestionInfoViewModel, position: Int) {
+            binding.setVariable(BR.viewModel, questionInfoViewModel)
             binding.setVariable(BR.position, position)
         }
     }
 
-    inner class ImageViewViewHolder(private val binding: RowQuestionDetailsBinding) :
+    inner class ImageViewViewHolder(private val binding: RowImageViewBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bindData(productInfoViewModel: QuestionInfoViewModel, position: Int) {
-            binding.setVariable(BR.viewModel, productInfoViewModel)
+        fun bindData(questionInfoViewModel: QuestionInfoViewModel, position: Int) {
+            binding.setVariable(BR.viewModel, questionInfoViewModel)
             binding.setVariable(BR.position, position)
         }
     }
