@@ -13,4 +13,5 @@
     <dimen name="dimen_3dp">3dp</dimen>
     <dimen name="dimen_12sp">12sp</dimen>
     <dimen name="dimen_66dp">66dp</dimen>
+    <dimen name="dimen_136dp">136dp</dimen>
 </resources>
