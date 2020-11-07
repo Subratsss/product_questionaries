@@ -1,5 +1,6 @@
 package com.subratsss.product_questionary_app.repository
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import com.subratsss.product_questionary_app.model.api_res_model.QuestionsRes
 import com.subratsss.product_questionary_app.service.AppServiceConnector
@@ -22,10 +23,14 @@ class QuestionaryRepo {
         webService.getQuestionInfo()
                 .enqueue(object : Callback<QuestionsRes> {
                     override fun onResponse(call: Call<QuestionsRes>, response: Response<QuestionsRes>) {
-                        questonInfo.value = response.body()
+                        Log.v("SSS","SSS check1 "+ response.body()!!.questions)
+                        if (response.body()!!.status){
+                            questonInfo.value = response.body()
+                        }
                     }
 
                     override fun onFailure(call: Call<QuestionsRes>, t: Throwable) {
+                        Log.v("SSS","SSS check2 "+t.message)
                         questonInfo.value = null
                     }
 
