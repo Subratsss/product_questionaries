@@ -51,6 +51,12 @@ class QuestionInfoViewModel : ViewModel() {
         return questionInfoList[position].values
     }
 
+    fun setLogoImage(position: Int): String {
+        return questionInfoList[position].url
+    }
+
+
+
 
 
 }
