@@ -15,6 +15,7 @@ object AppServiceConnector {
             interceptor.level = HttpLoggingInterceptor.Level.BODY
 
             val client = OkHttpClient.Builder()
+                .addInterceptor(NetworkInterceptor())
                     .addInterceptor(interceptor)
                     .connectTimeout(1, TimeUnit.MINUTES)
                     .readTimeout(3, TimeUnit.MINUTES)
