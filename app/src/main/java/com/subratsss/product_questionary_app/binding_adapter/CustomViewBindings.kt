@@ -51,4 +51,18 @@ fun setMultipleSelection(linearLayout: LinearLayout, values: List<ValueInfo>?){
     }
 }
 
+@BindingAdapter("spinner")
+fun setSpinner(spinner: Spinner, values: List<ValueInfo>?){
+    val spinnerArray = ArrayList<String>()
+    if (!values.isNullOrEmpty()) {
+        for (i in 1..values.size) {
+            spinnerArray.add(values[i - 1].value)
+        }
+            val spinnerArrayAdapter =
+                ArrayAdapter(spinner.context, R.layout.simple_spinner_dropdown_item, spinnerArray)
+            spinner.adapter = spinnerArrayAdapter
+
+        }
+    }
+
 
