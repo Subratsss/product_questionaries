@@ -1,11 +1,12 @@
 package com.subratsss.product_questionary_app.binding_adapter
 
 import android.R
+import android.app.Activity
 import android.view.View
 import android.widget.*
 import androidx.core.net.toUri
 import androidx.databinding.BindingAdapter
-import com.bumptech.glide.Glide
+import com.github.twocoffeesoneteam.glidetovectoryou.GlideToVectorYou
 import com.subratsss.product_questionary_app.model.ValueInfo
 
 
@@ -18,9 +19,7 @@ fun setImageUrl(imgView: ImageView, imgUrl: String?){
     if (!imgUrl.isNullOrEmpty()) {
         imgUrl.let {
             val imgUri = it.toUri().buildUpon().scheme("https").build()
-            Glide.with(imgView.context)
-                .load(imgUri)
-                .into(imgView)
+            GlideToVectorYou.justLoadImage(imgView.context as Activity?, imgUri, imgView)
         }
     }
 
